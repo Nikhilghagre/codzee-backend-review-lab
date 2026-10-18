@@ -16,4 +16,7 @@ module.exports = {
     failureRate: toNumber(process.env.PAYMENT_FAILURE_RATE, 0.05),
     timeoutRate: toNumber(process.env.PAYMENT_TIMEOUT_RATE, 0.05),
   },
+  pricing: {
+    latencyMs: toNumber(process.env.PRICING_LATENCY_MS, 200),
+  },
 };

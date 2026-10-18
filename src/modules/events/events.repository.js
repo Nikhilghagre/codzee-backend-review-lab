@@ -1,6 +1,8 @@
 const { getDb } = require('../../db');
+const { inList } = require('../../common/utils/sql');
+const { SEAT_HOLDING_STATUSES } = require('../bookings/bookings.constants');
 
-const ACTIVE_BOOKING = "b.status IN ('PENDING', 'CONFIRMED')";
+const ACTIVE_BOOKING = inList('b.status', SEAT_HOLDING_STATUSES);
 
 function findAll() {
   return getDb()
