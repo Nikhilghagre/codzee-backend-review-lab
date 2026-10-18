@@ -30,7 +30,9 @@ src/
 ├── integrations/
 │   └── paymentGateway.js   # mock payment gateway
 └── modules/                # one folder per feature
+    ├── bookings/
     ├── events/             # routes -> controller -> service -> repository
+    ├── payments/
     └── users/
 ```
 
@@ -66,6 +68,7 @@ Simplified: the caller sends the authenticated user's id in the `x-user-id` head
 | GET | `/api/events/:id` | - | Event details |
 | GET | `/api/events/:id/seats` | - | Seats with price and availability |
 | GET | `/api/users/me` | `x-user-id` | Current user |
+| POST | `/api/payments` | `x-user-id` | Pay for a pending booking. Body: `{ "booking_id": 5 }`. Confirms the booking on success |
 
 ## Mock payment gateway
 
