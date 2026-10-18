@@ -73,6 +73,10 @@ function seed(db = getDb()) {
       const { lastInsertRowid: paymentId } = insertPayment.run(1, seat.price_paise, `pay_seed_${i + 1}`);
       insertBooking.run(1, seat.id, paymentId);
     });
+
+    // A booking awaiting payment for user 2
+    const pendingSeat = db.prepare("SELECT id FROM seats WHERE event_id = 2 AND seat_no = 'A2'").get();
+    db.prepare("INSERT INTO bookings (user_id, seat_id, status) VALUES (2, ?, 'PENDING')").run(pendingSeat.id);
   });
 
   run();

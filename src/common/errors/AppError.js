@@ -31,4 +31,24 @@ class ConflictError extends AppError {
   }
 }
 
-module.exports = { AppError, BadRequestError, UnauthorizedError, NotFoundError, ConflictError };
+class PaymentRequiredError extends AppError {
+  constructor(message = 'Payment required') {
+    super(message, 402, 'PAYMENT_REQUIRED');
+  }
+}
+
+class GatewayTimeoutError extends AppError {
+  constructor(message = 'Upstream service timed out') {
+    super(message, 504, 'GATEWAY_TIMEOUT');
+  }
+}
+
+module.exports = {
+  AppError,
+  BadRequestError,
+  UnauthorizedError,
+  NotFoundError,
+  ConflictError,
+  PaymentRequiredError,
+  GatewayTimeoutError,
+};
