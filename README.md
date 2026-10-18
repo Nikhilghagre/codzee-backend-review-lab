@@ -28,8 +28,10 @@ src/
 │   ├── middleware/         # auth (x-user-id), error handler
 │   └── utils/              # money (INR/paise), validation
 ├── integrations/
-│   └── paymentGateway.js   # mock payment gateway
+│   ├── paymentGateway.js   # mock payment gateway
+│   └── pricingService.js   # mock pricing service (convenience fee + GST)
 └── modules/                # one folder per feature
+    ├── bookings/
     ├── events/             # routes -> controller -> service -> repository
     └── users/
 ```
@@ -66,6 +68,7 @@ Simplified: the caller sends the authenticated user's id in the `x-user-id` head
 | GET | `/api/events/:id` | - | Event details |
 | GET | `/api/events/:id/seats` | - | Seats with price and availability |
 | GET | `/api/users/me` | `x-user-id` | Current user |
+| POST | `/api/bookings` | `x-user-id` | Book up to 6 seats for an event. Body: `{ "event_id": 1, "seat_ids": [12, 13] }`. Creates `PENDING` bookings and returns the price breakdown (subtotal, convenience fee, GST) |
 
 ## Mock payment gateway
 
