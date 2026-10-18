@@ -37,4 +37,10 @@ function findSeatsByEventId(eventId) {
     .all(eventId);
 }
 
-module.exports = { findAll, findById, findSeatsByEventId };
+function findSeatById(id) {
+  return getDb()
+    .prepare('SELECT id, event_id, seat_no, category, price_paise FROM seats WHERE id = ?')
+    .get(id);
+}
+
+module.exports = { findAll, findById, findSeatsByEventId, findSeatById };
